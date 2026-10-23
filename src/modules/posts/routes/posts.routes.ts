@@ -107,3 +107,28 @@ router.patch("/:id", (request, response) => {
 
   response.status(200).json(postForUpdate);
 });
+
+// DELETE /posts/:id
+router.delete("/:id", (request, response) => {
+  // Пример того что у нас лежит в params
+  // const params = {
+  //   id: 1234
+  // }
+
+  // const id = request.params.id;
+  // const {id} = request.params;
+  const { id } = request.params;
+  const postForDelete = posts.find((p) => p.id === id);
+
+  if (!postForDelete) {
+    response
+      .status(404)
+      .json({ code: 404, message: `Post with id ${id} is not found` });
+    throw new Error("Not Found");
+  } else {
+    const postIndex = posts.findIndex((p) => p.id === id); // Например 0
+    posts.splice(postIndex, 1);
+
+    response.status(200).json(posts);
+  }
+});
