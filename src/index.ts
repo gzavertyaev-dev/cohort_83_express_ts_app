@@ -1,6 +1,7 @@
 import express from "express";
 
 import postsRouter from "./modules/posts/routes/posts.routes";
+import buildTodoRouter from "./modules/todos/todo.containers";
 
 // Создание бэкенд приложения. Для "управления" сервером
 const app = express();
@@ -34,6 +35,7 @@ app.use(express.json());
 // });
 
 app.use("/posts", postsRouter);
+app.use('/todos', buildTodoRouter())
 
 // Порт, через который открывается наше приложение
 const PORT = 3000;

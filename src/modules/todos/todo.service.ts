@@ -9,6 +9,10 @@ class TodoService {
   }
 
   getAllTodos(): Promise<Todo[]> {
+    // if (!token) {
+    //   throw new Error("You shoul login");
+    // }
+    
     return this.repo.findAllTodos();
   }
 
